@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -163,7 +163,7 @@
             margin-bottom: -10px;
         }
 
-        /* Sentence Display Area (New Feature) */
+        /* Sentence Display Area */
         #sentence-display {
             min-height: 50px;
             display: flex;
@@ -332,16 +332,10 @@
         </div>
 
         <!-- Start Screen -->
-        <div id="start-screen" class="flex flex-col items-center" style="margin-top: 150px;">
-            <h1 class="text-6xl md:text-8xl text-yellow-400 font-black mb-4 text-center tracking-tighter" style="text-shadow: 6px 6px 0px #000;">METRO MATH</h1>
-            <div class="bg-black/60 p-6 rounded-xl backdrop-blur-md text-center max-w-lg mb-8 border border-yellow-500/30">
-                <p class="text-xl text-yellow-400 mb-2 font-bold uppercase tracking-wider">Instructions</p>
-                <p class="text-lg text-gray-300">1. Solve the equation on the board.</p>
-                <p class="text-lg text-gray-300">2. Select the correct answer.</p>
-                <p class="text-lg text-white font-bold mt-2">3. Read the result aloud!</p>
-            </div>
+        <div id="start-screen" class="flex flex-col items-center" style="margin-top: 50px;">
+            <h1 class="text-6xl md:text-8xl text-yellow-400 font-black mb-12 text-center tracking-tighter" style="text-shadow: 6px 6px 0px #000;">METRO MATH</h1>
             <button class="btn-start" onclick="startGame()">
-                <i class="fas fa-play mr-3"></i> Start Shift
+                <i class="fas fa-play mr-3"></i> Start
             </button>
         </div>
 
@@ -403,7 +397,6 @@
     ];
 
     // --- Logic & State ---
-    // Predefined Problems (Addition/Subtraction)
     const fixedProblems = [
         { a: 33, b: 21, op: '+', ans: 54 },
         { a: 45, b: 22, op: '+', ans: 67 },
@@ -491,7 +484,6 @@
         
         const randomTrain = trainImages[Math.floor(Math.random() * trainImages.length)];
         trainImg.src = randomTrain;
-        // Display Equation on Board
         boardNumberEl.textContent = `${problem.a} ${problem.op} ${problem.b} = ?`;
 
         const isLeftToRight = !lastDirectionLR;
@@ -533,7 +525,6 @@
     }
 
     function showQuiz(problem) {
-        // Generate Distractors
         let options = [problem.ans];
         while (options.length < 4) {
             let offset = (Math.random() > 0.5 ? 1 : -1) * (Math.random() > 0.5 ? 10 : Math.floor(Math.random()*5)+1);
@@ -547,7 +538,6 @@
         }
         shuffleArray(options);
 
-        // Reset UI
         sentenceDisplay.textContent = "Calculating...";
         sentenceDisplay.classList.remove('show');
         optionsGrid.innerHTML = '';
@@ -576,7 +566,6 @@
             allBtns.forEach(b => b.classList.add('disabled'));
             playTone('correct');
 
-            // Generate Sentence
             const textA = numberToEnglish(problem.a);
             const textB = numberToEnglish(problem.b);
             const textAns = numberToEnglish(problem.ans);
